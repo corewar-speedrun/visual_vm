@@ -67,28 +67,28 @@ void	print_players(WINDOW *win[2], int num_of_players)
 {
 //	int num_of_players;
 //Пришет кол-во игроков и  прочее"
-    mvwprintw(win[1], 11, 4, "%s %s", "Player -1 :", g_vm->champs[0]->name);
+    mvwprintw(win[1], 11, 4, "%s %s", "Player -1 :", g_vm->champs[1]->name);
     mvwprintw(win[1], 12, 6, "%s   ", "Last live :");
     mvwprintw(win[1], 13, 6, "%s   ", "Lives in current period :");
     if (g_vm->champs_nmbr > 1) {
-        mvwprintw(win[1], 15, 4, "%s %s", "Player -2 :", g_vm->champs[1]->name);
+        mvwprintw(win[1], 15, 4, "%s %s", "Player -2 :", g_vm->champs[2]->name);
         mvwprintw(win[1], 16, 6, "%s   ", "Last live :");
         mvwprintw(win[1], 17, 6, "%s   ", "Lives in current period :");
     }
     if (g_vm->champs_nmbr > 2) {
-        mvwprintw(win[1], 19 , 4, "%s %s", "Player -3 :", g_vm->champs[2]->name);
+        mvwprintw(win[1], 19 , 4, "%s %s", "Player -3 :", g_vm->champs[3]->name);
         mvwprintw(win[1], 20, 6, "%s   ", "Last live :");
         mvwprintw(win[1], 21, 6, "%s   ", "Lives in current period :");
     }
     if (g_vm->champs_nmbr > 3) {
-        mvwprintw(win[1], 23, 4, "%s ", "Player -4 :");
+        mvwprintw(win[1], 23, 4, "%s %s", "Player -4 :", g_vm->champs[4]->name);
         mvwprintw(win[1], 24, 6, "%s   ", "Last live :");
         mvwprintw(win[1], 25, 6, "%s   ", "Lives in current period :");
     }
-    mvwprintw(win[1], 13 + (4 * (num_of_players - 1)) + 8, 6, "%s %d", "CYCLE_TO_DIE :", g_vm->to_die);
-    mvwprintw(win[1], 13 + (4 * (num_of_players - 1)) + 10, 6, "%s %d", "CYCLE_DELTA :", CYCLE_DELTA);
-    mvwprintw(win[1], 13 + (4 * (num_of_players - 1)) + 12, 6, "%s %d", "NBR_LIVE :", NBR_LIVE);
-    mvwprintw(win[1], 13 + (4 * (num_of_players - 1)) + 14, 6, "%s %d", "MAX_CHECKS :", MAX_CHECKS);
+    mvwprintw(win[1], 13 + (4 * (g_vm->champs_nmbr - 1)) + 8, 6, "%s %d", "CYCLE_TO_DIE :", g_vm->to_die);
+    mvwprintw(win[1], 13 + (4 * (g_vm->champs_nmbr - 1)) + 10, 6, "%s %d", "CYCLE_DELTA :", CYCLE_DELTA);
+    mvwprintw(win[1], 13 + (4 * (g_vm->champs_nmbr - 1)) + 12, 6, "%s %d", "NBR_LIVE :", NBR_LIVE);
+    mvwprintw(win[1], 13 + (4 * (g_vm->champs_nmbr - 1)) + 14, 6, "%s %d", "MAX_CHECKS :", MAX_CHECKS);
 }
 
 
