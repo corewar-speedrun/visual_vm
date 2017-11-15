@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <mach/mach_types.h>
-#include "vm.h"
+#include "corewar.h"
 
 
 int	paused(WINDOW *win[2], int sleep) {
@@ -63,25 +63,48 @@ void    players_color(WINDOW *win[2], int i)
     wrefresh(win[1]);
 }
 
-void	print_players(WINDOW *win[2], int num_of_players)
+void    print_cl_players(WINDOW *win[2])
+{
+    wattron(win[1], COLOR_PAIR(7));
+    mvwprintw(win[1], 11, 16, "%s",  g_vm->champs[1]->name);
+    if (g_vm->champs_nmbr > 1)
+    {
+        wattron(win[1], COLOR_PAIR(8));
+        mvwprintw(win[1], 15, 16, "%s", g_vm->champs[2]->name);
+    }
+    if (g_vm->champs_nmbr > 2)
+    {
+        wattron(win[1], COLOR_PAIR(6));
+        mvwprintw(win[1], 19 , 16, "%s", g_vm->champs[3]->name);
+    }
+    if (g_vm->champs_nmbr > 3)
+    {
+        wattron(win[1], COLOR_PAIR(9));
+        mvwprintw(win[1], 23, 16, "%s", g_vm->champs[4]->name);
+    }
+    wattroff(win[1], COLOR_PAIR(9));
+    wrefresh(win[1]);   
+}
+
+void	print_players(WINDOW *win[2])
 {
 //	int num_of_players;
 //Пришет кол-во игроков и  прочее"
-    mvwprintw(win[1], 11, 4, "%s %s", "Player -1 :",  g_vm->champs[1]->name);
+    mvwprintw(win[1], 11, 4, "%s", "Player -1 :");
     mvwprintw(win[1], 12, 6, "%s   ", "Last live :");
     mvwprintw(win[1], 13, 6, "%s   ", "Lives in current period :");
     if (g_vm->champs_nmbr > 1) {
-        mvwprintw(win[1], 15, 4, "%s %s", "Player -2 :", g_vm->champs[2]->name);
+        mvwprintw(win[1], 15, 4, "%s", "Player -2 :");
         mvwprintw(win[1], 16, 6, "%s   ", "Last live :");
         mvwprintw(win[1], 17, 6, "%s   ", "Lives in current period :");
     }
     if (g_vm->champs_nmbr > 2) {
-        mvwprintw(win[1], 19 , 4, "%s %s", "Player -3 :", g_vm->champs[3]->name);
+        mvwprintw(win[1], 19, 4, "%s", "Player -3 :");
         mvwprintw(win[1], 20, 6, "%s   ", "Last live :");
         mvwprintw(win[1], 21, 6, "%s   ", "Lives in current period :");
     }
     if (g_vm->champs_nmbr > 3) {
-        mvwprintw(win[1], 23, 4, "%s %s", "Player -4 :", g_vm->champs[4]->name);
+        mvwprintw(win[1], 23, 4, "%s", "Player -4 :");
         mvwprintw(win[1], 24, 6, "%s   ", "Last live :");
         mvwprintw(win[1], 25, 6, "%s   ", "Lives in current period :");
     }
@@ -89,6 +112,7 @@ void	print_players(WINDOW *win[2], int num_of_players)
     mvwprintw(win[1], 13 + (4 * (g_vm->champs_nmbr - 1)) + 10, 6, "%s %d", "CYCLE_DELTA :", CYCLE_DELTA);
     mvwprintw(win[1], 13 + (4 * (g_vm->champs_nmbr - 1)) + 12, 6, "%s %d", "NBR_LIVE :", NBR_LIVE);
     mvwprintw(win[1], 13 + (4 * (g_vm->champs_nmbr - 1)) + 14, 6, "%s %d", "MAX_CHECKS :", MAX_CHECKS);
+    print_cl_players(win);
 }
 
 
@@ -136,8 +160,8 @@ int ncurses(int kakoito_int, int sleep)
 	mvwprintw(win[1], 2, 4, "%s   ", "** RUNNING **");
 	mvwprintw(win[1], 4, 4, "%s   ", "Cycles/second limit :");
 	mvwprintw(win[1], 7, 4, "%s %d", "Cycle :", kakoito_int);
-	mvwprintw(win[1], 9, 4, "%s   ", "Processes :");
-    print_players(win, 2);
+	mvwprintw(win[1], 9, 4, "%s %d", "Processes :",  g_vm->cars_nmbr);
+    print_players(win);
     mvwprintw(win[1], 5, 27,  "speed %d         ",  sleep);
 	y = 1;
 	x = 0;
