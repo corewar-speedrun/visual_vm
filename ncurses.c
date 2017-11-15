@@ -38,7 +38,7 @@ int	paused(WINDOW *win[2], int sleep) {
 	}
     if (ch == KEY_DOWN && sleep != 0)
         sleep -= 2500;
-    if (sleep == 0)
+    if (sleep <= 0)
         sleep = 1;
     if (ch == KEY_UP && sleep != 0)
         sleep += 2500 ;
@@ -67,7 +67,7 @@ void	print_players(WINDOW *win[2], int num_of_players)
 {
 //	int num_of_players;
 //Пришет кол-во игроков и  прочее"
-    mvwprintw(win[1], 11, 4, "%s %s", "Player -1 :", g_vm->champs[1]->name);
+    mvwprintw(win[1], 11, 4, "%s %s", "Player -1 :",  g_vm->champs[1]->name);
     mvwprintw(win[1], 12, 6, "%s   ", "Last live :");
     mvwprintw(win[1], 13, 6, "%s   ", "Lives in current period :");
     if (g_vm->champs_nmbr > 1) {
